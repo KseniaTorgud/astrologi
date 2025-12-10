@@ -1,0 +1,16 @@
+{
+    "ksenia": {
+        "password": "scrypt:32768:8:1$v78JkHv7FfH8BnEr$dcbe9e25df3b70748bbaf118c14040d3a71f7fbc0a926bb367885fbc09d12cec9ffeb978d51e627226ffc6808245fa06e71d8d901f060261b114bf72520dd87e",
+        "birthday": "2008-09-28",
+        "zodiac": "Весы",
+        "saved_compatibility": [
+            {
+                "your_name": "Ксения",
+                "partner_name": "Георгий",
+                "your_sign": "Весы",
+                "partner_sign": "Дева",
+                "result": "Весы и Дева — разные темпераменты. Но уважение присутствует."
+            }
+        ]
+    }
+}

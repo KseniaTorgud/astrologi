@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Совместимость</title>
+    <link rel="stylesheet" href="/static/compatibility.css">
+</head>
+<body>
+<div class="stars"></div>
+<script>
+    // генерируем 60 звезд
+//    for (let i = 0; i < 60; i++) {
+//        const star = document.createElement("div");
+//        star.classList.add("star");
+
+//        star.style.left = Math.random() * 100 + "vw";
+ //       star.style.top = (Math.random() * 100 + 30) + "vh";
+ //       star.style.animationDuration = (4 + Math.random() * 4) + "s";
+ //       star.style.opacity = Math.random();
+
+//        document.querySelector(".stars").appendChild(star);
+//    }
+</script>
+
+<div class="container">
+
+    <h1>Совместимость</h1>
+
+    <div class="circle">
+        <img src="/static/zodiac/moon3.png" alt="Зодиак">
+    </div>
+
+    {% if not show_result %}
+        <!-- Показываем форму только ДО расчёта -->
+        <form method="post">
+            <label>Ваше имя</label>
+            <input type="text" name="name1" required>
+
+            <label>Дата рождения</label>
+            <input type="date" name="birthday1" required>
+
+            <label>Имя партнера</label>
+            <input type="text" name="name2" required>
+
+            <label>Дата рождения партнера</label>
+            <input type="date" name="birthday2" required>
+
+            <button type="submit">Показать совместимость</button>
+        </form>
+    {% endif %}
+
+    {% if show_result %}
+        <!-- После отправки формы здесь результат -->
+        <div class="result">
+            <h2>{{ header }}</h2>
+            <p>{{ result }}</p>
+        </div>
+    {% endif %}
+
+    <a href="/cabinet" class="back">К личному кабинету</a>
+
+</div>
+
+</body>
+</html>

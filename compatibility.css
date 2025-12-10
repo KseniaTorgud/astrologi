@@ -1,0 +1,124 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #090a1a;
+    color: white;
+    font-family: "Segoe UI", sans-serif;
+    overflow-x: hidden;
+}
+
+/* ---- ФОН СО ЗВЁЗДАМИ ---- */
+.stars {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0; left: 0;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: drift 6s linear infinite;
+}
+
+@keyframes moveStars {
+    from { background-position: 0 0; }
+    to { background-position: -10000px 5000px; }
+}
+
+.container {
+    width: 500px;
+    max-width: 90%;
+    margin: 80px auto;
+    padding: 30px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 25px rgba(255,255,255,0.12);
+    text-align: center;
+}
+
+h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #ffd27d;
+}
+
+.circle {
+    width: 280px;
+    height: 280px;
+    margin: 0 auto 25px auto;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+    box-shadow: 0 0 25px rgba(255,255,255,0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle img {
+    width: 85%;
+    filter: drop-shadow(0 0 10px rgba(164, 163, 163, 0.2));
+}
+
+label {
+    text-align: left;
+    display: block;
+    margin: 12px 0 4px;
+    font-size: 17px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+    outline: none;
+    margin-bottom: 10px;
+    background: rgba(255,255,255,0.2);
+    color: white;
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 18px;
+    color: white;
+    background: #353c89;
+    border: none;
+    border-radius: 12px;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+button:hover {
+    background: #4b52d3;
+}
+
+.result {
+    margin-top: 25px;
+    padding: 20px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 12px;
+    line-height: 1.6;
+}
+
+.back {
+    display: block;
+    margin-top: 25px;
+    text-decoration: none;
+    color: #ffd27d;
+    font-size: 18px;
+}
+
+.back:hover {
+    text-decoration: underline;
+}

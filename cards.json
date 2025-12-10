@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "name": "Шут",
+    "image": "/static/tarot/fool.png",
+    "description": "Начало пути, новые возможности, открытость, свобода духа."
+  },
+  {
+    "id": 2,
+    "name": "Маг",
+    "image": "/static/tarot/magician.png",
+    "description": "Сила намерения, навыки, умение создавать реальность."
+  }
+]

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Таро</title>
+</head>
+<body>
+
+<h1>Гадание на Таро</h1>
+
+<div id="card-container">
+    <img id="tarot-card" 
+         src="/static/tarot/back.png"
+         style="width:250px; cursor:pointer;">
+</div>
+
+<h2 id="card-name"></h2>
+<p id="card-description"></p>
+
+<script>
+let cardFlipped = false;
+let cardData = null;
+
+async function loadCard() {
+    const response = await fetch('/tarot/draw');
+    cardData = await response.json();
+}
+
+loadCard();
+
+document.getElementById("tarot-card").onclick = function () {
+    if (!cardFlipped) {
+        this.src = cardData.image;
+        document.getElementById("card-name").innerText = cardData.name;
+        document.getElementById("card-description").innerText = cardData.description;
+        cardFlipped = true;
+    }
+};
+</script>
+
+</body>
+</html>

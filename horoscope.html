@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Гороскоп — {{ sign_name }}</title>
+    <link rel="stylesheet" href="/static/horoscope.css">
+</head>
+
+<body>
+
+<!-- Плавающие звезды -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const count = 80;  
+    for (let i = 0; i < count; i++) {
+        const star = document.createElement("div");
+        star.classList.add("star");
+        star.style.left = Math.random() * 100 + "vw";
+        star.style.top = Math.random() * 100 + "vh";
+        star.style.animationDelay = Math.random() * 3 + "s";
+        document.body.appendChild(star);
+    }
+});
+</script>
+
+<div class="horoscope-container">
+
+    <div class="zodiac-card">
+
+        <div class="zodiac-circle">
+            <img src="/static/zodiac/zodiac.png" alt="{{ sign }}" class="zodiac-icon">
+        </div>
+
+        <h1 class="zodiac-name">{{ sign_name }}</h1>
+        <p class="zodiac-date-range">{{ date_range }}</p>
+
+            <h1>{{ zodiac }}</h1>
+
+            <div class="date">
+                Дата рождения: {{ birthday }}
+            </div>
+
+            <div class="text">
+                {{ horoscope }}
+            </div>
+
+        <a href="/cabinet" class="back-btn">Назад</a>
+
+    </div>
+
+</div>
+
+</body>
+</html>
