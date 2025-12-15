@@ -10,6 +10,9 @@ import os
 app = Flask(__name__)
 app.secret_key = "your_secret_key"  # поставь любой длинный ключ
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+CARDS_PATH = os.path.join(BASE_DIR, "data", "cards.json")
 
 def zodiac_sign(day, month):
     zodiac = [
@@ -38,25 +41,29 @@ def zodiac_sign(day, month):
 @app.route("/", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        action = request.form.get("action")
-
+        mode = request.form.get("mode")  # login | register
         username = request.form.get("username")
         password = request.form.get("password")
 
-        if action == "login":
+        if mode == "login":
             ok, msg = login_user(username, password)
             if ok:
                 session["username"] = username
                 return redirect(url_for("cabinet"))
-            else:
-                return render_template("login.html", message=msg)
+            return render_template("auth.html", message=msg, mode="login")
 
-        elif action == "register":
+        elif mode == "register":
             ok, msg = register_user(username, password)
-            return render_template("login.html", message=msg)
+            if ok:
+                return render_template(
+                    "auth.html",
+                    message="Регистрация успешна ✨ Теперь войдите",
+                    mode="login"
+                )
+            return render_template("auth.html", message=msg, mode="register")
 
-    return render_template("login.html")
-
+    # GET
+    return render_template("auth.html", mode="login")
 
 # ---------------- Личный кабинет ----------------
 @app.route("/cabinet")
@@ -73,23 +80,29 @@ def tarot():
     if "username" not in session:
         return redirect(url_for("login"))
 
-    return render_template("tarot.html")
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    tarot_path = os.path.join(base_dir, "tarot.json")
 
-
-# ------------------ ТАРО — получение случайной карты ----------------
-@app.route("/tarot/draw")
-def tarot_draw():
-    if "username" not in session:
-        return jsonify({"error": "not authorized"}), 403
-
-    file_path = os.path.join("tarot", "cards.json")
-
-    with open(file_path, "r", encoding="utf-8") as f:
+    with open(tarot_path, "r", encoding="utf-8") as f:
         cards = json.load(f)
 
-    card = random.choice(cards)
+    card = random.choice(list(cards.values()))
 
-    return jsonify(card)
+    return render_template("tarot.html", card=card)
+
+@app.route("/tarot-three")
+def tarot_three():
+    if "username" not in session:
+        return redirect(url_for("login"))
+
+    tarot_path = os.path.join(BASE_DIR, "tarot.json")
+    with open(tarot_path, "r", encoding="utf-8") as f:
+        cards = json.load(f)
+
+    # 3 разные карты
+    three_cards = random.sample(list(cards.values()), 3)
+    return jsonify(three_cards)
+
 
 
 # ------------------ Гороскоп -----------------
