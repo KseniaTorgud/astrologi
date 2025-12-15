@@ -1,0 +1,219 @@
+/* ===== ОСНОВА СТРАНИЦЫ ===== */
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Segoe UI", sans-serif;
+    background:
+        radial-gradient(circle at 50% 20%, rgba(120, 140, 255, 0.15), transparent 40%),
+        radial-gradient(circle at bottom, #0a0d25, #050711 70%);
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ===== ЗАГОЛОВОК ===== */
+h1 {
+    margin-top: 50px;
+    font-weight: 300;
+    letter-spacing: 3px;
+    font-size: 28px;
+    text-transform: uppercase;
+}
+
+/* ===== ОБЁРТКА КАРТЫ (НЕ ТРОГАЕМ МЕХАНИКУ) ===== */
+.card-wrapper {
+    perspective: 1200px;
+    width: 220px;
+    margin: 55px auto;
+    position: relative;
+}
+
+/* ===== МЯГКОЕ СВЕЧЕНИЕ ПОД КАРТОЙ ===== */
+.card-wrapper::before {
+    content: "";
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    left: 50%;
+    top: 55%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(120, 140, 255, 0.35), transparent 65%);
+    filter: blur(35px);
+    z-index: -1;
+}
+
+/* ===== КАРТА (ТВОЙ КОД — БЕЗ ИЗМЕНЕНИЙ) ===== */
+.card {
+    width: 220px;
+    height: 360px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.9s ease;
+    cursor: pointer;
+}
+
+.card.flipped {
+    transform: rotateY(180deg);
+}
+
+/* ===== СТОРОНЫ ===== */
+.side {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 18px;
+    box-sizing: border-box;
+    box-shadow: 0 0 25px rgba(140, 150, 255, 0.35);
+}
+
+/* ===== РУБАШКА ===== */
+.side.back {
+    background: url("/static/tarot/back.jpg") center / cover no-repeat;
+}
+
+/* ===== ЛИЦЕВАЯ СТОРОНА ===== */
+.side.front {
+    transform: rotateY(180deg);
+    background: linear-gradient(135deg, #1d2261, #0b0f3a);
+    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: 1.2px;
+    line-height: 1.4;
+    color: #e6e8ff;
+}
+
+/* ===== ТРАКТОВКА ===== */
+.meaning {
+    max-width: 560px;
+    margin: 35px auto 0;
+    padding: 18px 24px;
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.7;
+    display: none;
+    opacity: 0;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 14px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 0 30px rgba(120, 140, 255, 0.15);
+    animation: fadeIn 1s ease forwards;
+}
+
+/* ===== ПЛАВНОЕ ПОЯВЛЕНИЕ ===== */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* ===== ССЫЛКА ===== */
+a {
+    margin: 45px 0 30px;
+    color: #cfd3ff;
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ===== ЗВЁЗДНОЕ НЕБО ===== */
+.stars {
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.9), transparent),
+        radial-gradient(2px 2px at 20% 40%, rgba(255,255,255,.8), transparent),
+        radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,.7), transparent),
+        radial-gradient(3px 3px at 40% 30%, rgba(200,210,255,.9), transparent),
+        radial-gradient(2px 2px at 50% 50%, rgba(255,255,255,.6), transparent),
+        radial-gradient(1px 1px at 60% 70%, rgba(255,255,255,.8), transparent),
+        radial-gradient(2px 2px at 70% 20%, rgba(180,190,255,.9), transparent),
+        radial-gradient(1px 1px at 80% 80%, rgba(255,255,255,.7), transparent),
+        radial-gradient(3px 3px at 90% 60%, rgba(220,220,255,.8), transparent);
+    background-size: cover;
+    pointer-events: none;
+    z-index: -1;
+}
+.stars {
+    animation: twinkle 6s infinite alternate;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.6; }
+    to { opacity: 1; }
+}
+
+.constellations {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.12;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* ===== КНОПКИ ВКЛАДОК ===== */
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin: 25px 0;
+    gap: 15px;
+}
+
+.tab-btn {
+    padding: 12px 28px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #7d7f8b;
+    background: rgba(30, 30, 80, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 0 15px rgba(120, 140, 255, 0.2);
+}
+
+.tab-btn:hover {
+    background: rgba(50, 50, 150, 0.5);
+    box-shadow: 0 0 20px rgba(120, 140, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.tab-btn.active {
+    background: linear-gradient(135deg, #788cff, #4a60c0);
+    color: #0b0e1c;
+    box-shadow: 0 0 25px rgba(120, 140, 255, 0.8);
+    transform: translateY(-1px);
+}
+
+
+
+#drawThreeCards {
+    padding: 14px 35px;
+    font-size: 17px;
+    font-weight: 600;
+    color: #0a0a1d;
+    background: linear-gradient(135deg, #b2b3b7, #abacb0);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 25px rgba(174, 174, 176, 0.6), 0 0 45px rgba(120, 140, 255, 0.4) inset;
+}
+
+#drawThreeCards:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 0 35px rgba(167, 167, 171, 0.8), 0 0 55px rgba(120, 140, 255, 0.5) inset;
+}

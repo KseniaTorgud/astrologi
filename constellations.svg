@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+    <defs>
+        <style>
+            .star {
+                fill: #dfe3ff;
+                opacity: 0.8;
+            }
+            .line {
+                stroke: #bfc6ff;
+                stroke-width: 1;
+                opacity: 0.35;
+            }
+        </style>
+    </defs>
+
+    <!-- СОЗВЕЗДИЕ 1 -->
+    <circle class="star" cx="200" cy="150" r="2"></circle>
+    <circle class="star" cx="260" cy="180" r="2"></circle>
+    <circle class="star" cx="320" cy="140" r="2"></circle>
+    <circle class="star" cx="360" cy="190" r="2"></circle>
+
+    <line class="line" x1="200" y1="150" x2="260" y2="180"></line>
+    <line class="line" x1="260" y1="180" x2="320" y2="140"></line>
+    <line class="line" x1="320" y1="140" x2="360" y2="190"></line>
+
+    <!-- СОЗВЕЗДИЕ 2 -->
+    <circle class="star" cx="700" cy="220" r="2"></circle>
+    <circle class="star" cx="740" cy="260" r="2"></circle>
+    <circle class="star" cx="780" cy="230" r="2"></circle>
+    <circle class="star" cx="820" cy="280" r="2"></circle>
+    <circle class="star" cx="860" cy="240" r="2"></circle>
+
+    <line class="line" x1="700" y1="220" x2="740" y2="260"></line>
+    <line class="line" x1="740" y1="260" x2="780" y2="230"></line>
+    <line class="line" x1="780" y1="230" x2="820" y2="280"></line>
+    <line class="line" x1="820" y1="280" x2="860" y2="240"></line>
+
+    <!-- СОЗВЕЗДИЕ 3 -->
+    <circle class="star" cx="450" cy="500" r="2"></circle>
+    <circle class="star" cx="500" cy="540" r="2"></circle>
+    <circle class="star" cx="560" cy="520" r="2"></circle>
+    <circle class="star" cx="610" cy="560" r="2"></circle>
+
+    <line class="line" x1="450" y1="500" x2="500" y2="540"></line>
+    <line class="line" x1="500" y1="540" x2="560" y2="520"></line>
+    <line class="line" x1="560" y1="520" x2="610" y2="560"></line>
+
+</svg>

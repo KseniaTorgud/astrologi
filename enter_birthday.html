@@ -1,13 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Дата рождения</title>
+    <link rel="stylesheet" href="/static/bd.css">
+</head>
 <body>
-    <h2>Введите дату рождения</h2>
+
+<div class="birth-container">
+    <h1>Дата рождения</h1>
+    <p>Нужна для персональных расчётов</p>
 
     <form method="POST">
         <input type="date" name="birthday" required>
         <button type="submit">Сохранить</button>
     </form>
 
-    <a href="/cabinet">Назад</a>
+    <a href="/cabinet">Назад в кабинет</a>
+</div>
+
 </body>
 </html>

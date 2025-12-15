@@ -1,0 +1,156 @@
+/* ===== ФОН ===== */
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Segoe UI", sans-serif;
+    background: radial-gradient(circle at top, #1a1f4b, #070912);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ===== ЗВЁЗДЫ ===== */
+.stars {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: drift 6s linear infinite;
+}
+
+@keyframes drift {
+    from { transform: translateY(0); opacity: .6; }
+    to   { transform: translateY(-120vh); opacity: 0; }
+}
+
+/* ===== КАРТОЧКА ===== */
+.auth-box {
+    width: 360px;
+    padding: 40px 35px;
+    background: rgba(20, 25, 70, 0.75);
+    border-radius: 22px;
+    box-shadow: 0 0 40px rgba(120, 140, 255, 0.35);
+    text-align: center;
+    backdrop-filter: blur(8px);
+    animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== ТАБЫ ===== */
+.auth-tabs {
+    display: flex;
+    margin-bottom: 25px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.08);
+}
+
+.tab {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: transparent;
+    color: #cfd3ff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.tab.active {
+    background: linear-gradient(135deg, #6d78ff, #9a7cff);
+    color: #fff;
+    box-shadow: 0 0 12px rgba(150,170,255,0.6);
+}
+
+/* ===== ТЕКСТ ===== */
+.subtitle {
+    font-size: 14px;
+    opacity: 0.85;
+    margin-bottom: 20px;
+}
+
+.message {
+    margin-bottom: 18px;
+    font-size: 14px;
+    color: #ffb4b4;
+}
+
+/* ===== ИНПУТЫ ===== */
+input {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+}
+
+input::placeholder {
+    color: #cfd3ff;
+}
+
+/* ===== КНОПКА ===== */
+button[type="submit"] {
+    margin-top: 10px;
+    padding: 12px;
+    width: 100%;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    background: linear-gradient(135deg, #6d78ff, #9a7cff);
+    color: #fff;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 18px rgba(150,170,255,0.6);
+}
+
+/* ===== ДВИЖУЩИЕСЯ ЗВЁЗДЫ ===== */
+.moving-stars {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.moving-star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 50%;
+    box-shadow: 0 0 6px rgba(180, 190, 255, 0.8);
+    animation: starMove linear infinite;
+}
+
+@keyframes starMove {
+    from {
+        transform: translate(0, 0);
+        opacity: 0.8;
+    }
+    to {
+        transform: translate(-120vw, 120vh);
+        opacity: 0;
+    }
+}

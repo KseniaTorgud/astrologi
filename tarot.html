@@ -3,39 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <title>Таро</title>
+    <link rel="stylesheet" href="/static/tarot.css">
+    <style>
+        /* Переключение секций */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            margin: 0 10px;
+            cursor: pointer;
+            border: 1px solid #b9aeae;
+            background: #f0efef;
+            border-radius: 5px;
+        }
+
+        .tab-btn.active {
+            background: #ddd;
+            font-weight: bold;
+        }
+
+        .tab-content {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .three-cards {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
 
-<h1>Гадание на Таро</h1>
+<div class="stars"></div>
+<img src="/static/tarot/constellations.svg" class="constellations">
 
-<div id="card-container">
-    <img id="tarot-card" 
-         src="/static/tarot/back.png"
-         style="width:250px; cursor:pointer;">
+<h1 style="text-align:center;">Гадание Таро</h1>
+
+<!-- Кнопки переключения -->
+<div class="tabs">
+    <div class="tab-btn active" data-tab="one-card">Одна карта</div>
+    <div class="tab-btn" data-tab="three-cards-tab">Три карты</div>
 </div>
 
-<h2 id="card-name"></h2>
-<p id="card-description"></p>
+<!-- Раздел 1: Одна карта -->
+<div class="tab-content active" id="one-card">
+    <div class="card-wrapper">
+        <div class="card" id="tarotCard" onclick="flipCard()">
+            <div class="side back"></div>
+            <div class="side front">
+                {{ card.name }}
+            </div>
+        </div>
+    </div>
+
+    <div class="meaning" id="meaning">
+        {{ card.meaning }}
+    </div>
+</div>
+
+<!-- Раздел 2: Три карты -->
+<div class="tab-content" id="three-cards-tab">
+    <div class="three-cards">
+        <div class="card-wrapper">
+            <div class="card" id="card1">
+                <div class="side back"></div>
+                <div class="side front">?</div>
+            </div>
+        </div>
+        <div class="card-wrapper">
+            <div class="card" id="card2">
+                <div class="side back"></div>
+                <div class="side front">?</div>
+            </div>
+        </div>
+        <div class="card-wrapper">
+            <div class="card" id="card3">
+                <div class="side back"></div>
+                <div class="side front">?</div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="meaning" id="meaningThree"></div>
+    <button id="drawThreeCards" style="display:block; margin: 20px auto;">Гадать на 3 карты</button>
+    
+</div>
+
+<a href="/cabinet" style="display:block; text-align:center;">Назад в кабинет</a>
 
 <script>
-let cardFlipped = false;
-let cardData = null;
+    // ---------------- Переключение вкладок ----------------
+    const tabs = document.querySelectorAll(".tab-btn");
+    const contents = document.querySelectorAll(".tab-content");
 
-async function loadCard() {
-    const response = await fetch('/tarot/draw');
-    cardData = await response.json();
-}
+    tabs.forEach(tab => {
+        tab.addEventListener("click", () => {
+            tabs.forEach(t => t.classList.remove("active"));
+            tab.classList.add("active");
 
-loadCard();
+            const target = tab.dataset.tab;
+            contents.forEach(c => c.classList.remove("active"));
+            document.getElementById(target).classList.add("active");
+        });
+    });
 
-document.getElementById("tarot-card").onclick = function () {
-    if (!cardFlipped) {
-        this.src = cardData.image;
-        document.getElementById("card-name").innerText = cardData.name;
-        document.getElementById("card-description").innerText = cardData.description;
-        cardFlipped = true;
+    // ---------------- Одна карта ----------------
+    let isFlipped = false;
+
+    function flipCard() {
+        if (isFlipped) return;
+        isFlipped = true;
+        const card = document.getElementById("tarotCard");
+        const meaning = document.getElementById("meaning");
+
+        card.classList.add("flipped");
+        setTimeout(() => {
+            meaning.style.display = "block";
+        }, 800);
     }
-};
+
+    // ---------------- Три карты ----------------
+    document.getElementById("drawThreeCards").addEventListener("click", async () => {
+        const response = await fetch("/tarot-three");
+        const cards = await response.json();
+
+        const cardElems = [
+            document.getElementById("card1"),
+            document.getElementById("card2"),
+            document.getElementById("card3")
+        ];
+
+        const meaningDiv = document.getElementById("meaningThree");
+        meaningDiv.innerHTML = ""; // очистка предыдущего результата
+
+        cards.forEach((card, i) => {
+            const cardElem = cardElems[i];
+            cardElem.classList.add("flipped");
+
+            const front = cardElem.querySelector(".front");
+            front.innerHTML = card.name;
+
+            meaningDiv.innerHTML += `<p><strong>${card.name}:</strong> ${card.meaning}</p>`;
+        });
+
+        // Показываем трактовку
+        meaningDiv.style.display = "block";
+        meaningDiv.style.opacity = 0;
+        setTimeout(() => {
+            meaningDiv.style.opacity = 1;
+        }, 100);
+                });
 </script>
 
 </body>

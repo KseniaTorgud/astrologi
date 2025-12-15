@@ -12,5 +12,15 @@
                 "result": "Весы и Дева — разные темпераменты. Но уважение присутствует."
             }
         ]
+    },
+    "true": {
+        "password": "scrypt:32768:8:1$UpVosjI6GyBg5s5E$6a466d29da89c0f525df24faf71f1d0215304faed4e33cd8b595a8866b81e38e0797fb31716da0b29e77f0c39033fb2688781a8f3b32c886d3babe57dcd6d1ac",
+        "birthday": "2008-09-28",
+        "zodiac": "Весы"
+    },
+    "dura": {
+        "password": "scrypt:32768:8:1$5GtgtH5GkBWuL9fR$855ef65b5f213766fca6f767ddfd61eb602500dc6f1f3f4ff951011186ac78e6e165657e6e121e039f656fef6e5c4bc81ce8902caf0a66bf6cb68155281b613b",
+        "birthday": "2008-03-27",
+        "zodiac": "Овен"
     }
 }

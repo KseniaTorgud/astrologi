@@ -1,50 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
+    <meta charset="UTF-8">
+    <title>Личный кабинет</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
 
-<div class="moon-circle"></div>
-<div class="moon-circle2"></div>
-
-
 <div class="stars"></div>
-<script>
-    // генерируем 60 звезд
-    for (let i = 0; i < 60; i++) {
-        const star = document.createElement("div");
-        star.classList.add("star");
-
-        star.style.left = Math.random() * 100 + "vw";
-        star.style.top = (Math.random() * 100 + 30) + "vh";
-        star.style.animationDuration = (4 + Math.random() * 4) + "s";
-        star.style.opacity = Math.random();
-
-        document.querySelector(".stars").appendChild(star);
-    }
-</script>
-
 
 <div class="top-bar">
-    <a href="/logout"><button class="logout-btn">Выйти</button></a>
+    <a href="/logout" class="logout-btn">Выйти</a>
 </div>
 
-<div class="card">
-    <h1>Привет, {{ username }} ✨</h1>
+<div class="cabinet-card">
+    <h1>Добро пожаловать, {{ username }}</h1>
+    <p class="subtitle">Ваше пространство предсказаний ✨</p>
 
-    <a href="/tarot">
-        <button class="cabinet-btn">Таро</button>
-    </a>
-
-    <a href="/horoscope">
-        <button class="cabinet-btn">Гороскоп</button>
-    </a>
-
-    <a href="/compatibility">
-        <button class="cabinet-btn"></button>Совместимость</button>
-    </a>
+    <div class="actions">
+        <a href="/tarot" class="action-btn tarot">🔮 Таро</a>
+        <a href="/horoscope" class="action-btn horoscope">♈ Гороскоп</a>
+        <a href="/compatibility" class="action-btn compatibility">💞 Совместимость</a>
+    </div>
 </div>
+
+<script>
+    const stars = document.querySelector(".stars");
+    for (let i = 0; i < 70; i++) {
+        const star = document.createElement("div");
+        star.className = "star";
+        star.style.left = Math.random() * 100 + "vw";
+        star.style.top = Math.random() * 100 + "vh";
+        //star.style.animationDuration = (4 + Math.random() * 5) + "s";
+        star.style.opacity = Math.random();
+        stars.appendChild(star);
+    }
+</script>
 
 </body>
 </html>
