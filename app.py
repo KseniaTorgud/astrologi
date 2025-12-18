@@ -8,7 +8,7 @@ from datetime import datetime
 import os
 
 app = Flask(__name__)
-app.secret_key = "your_secret_key"  # поставь любой длинный ключ
+app.secret_key = "your_secret_key" 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -37,11 +37,10 @@ def zodiac_sign(day, month):
     return None
 
 
-# ---------------- Главная: вход / регистрация ----------------
 @app.route("/", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        mode = request.form.get("mode")  # login | register
+        mode = request.form.get("mode")  
         username = request.form.get("username")
         password = request.form.get("password")
 
@@ -62,10 +61,8 @@ def login():
                 )
             return render_template("auth.html", message=msg, mode="register")
 
-    # GET
     return render_template("auth.html", mode="login")
 
-# ---------------- Личный кабинет ----------------
 @app.route("/cabinet")
 def cabinet():
     if "username" not in session:
@@ -74,7 +71,6 @@ def cabinet():
     return render_template("cabinet.html", username=session["username"])
 
 
-# ------------------ ТАРО — страница ----------------
 @app.route("/tarot")
 def tarot():
     if "username" not in session:
@@ -99,13 +95,10 @@ def tarot_three():
     with open(tarot_path, "r", encoding="utf-8") as f:
         cards = json.load(f)
 
-    # 3 разные карты
     three_cards = random.sample(list(cards.values()), 3)
     return jsonify(three_cards)
 
 
-
-# ------------------ Гороскоп -----------------
 @app.route("/horoscope", methods=["GET", "POST"])
 def horoscope():
     if "username" not in session:
@@ -139,8 +132,6 @@ def horoscope():
         birthday=user["birthday"]
     )
 
-
-# ------------------ Совместимость -----------------
 @app.route("/compatibility", methods=["GET", "POST"])
 def compatibility():
     if "username" not in session:
@@ -186,7 +177,6 @@ def compatibility():
     return render_template("compatibility.html", show_result=False)
 
 
-# ------------------ Выход -----------------
 @app.route("/logout")
 def logout():
     session.pop("username", None)
