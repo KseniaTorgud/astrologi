@@ -12,8 +12,6 @@
 <div class="stars"></div>
 
 <div class="auth-box">
-
-    <!-- ТАБЫ -->
     <div class="auth-tabs">
         <button type="button" class="tab active" onclick="setMode('login')">Вход</button>
         <button type="button" class="tab" onclick="setMode('register')">Регистрация</button>
@@ -21,8 +19,6 @@
 
     <h1 id="authTitle">Вход</h1>
     <p class="subtitle" id="authSubtitle">Рады видеть вас снова ✨</p>
-
-    <!-- сообщение от Flask -->
     {% if message %}
         <div class="message">{{ message }}</div>
     {% endif %}
@@ -63,8 +59,6 @@ function setMode(mode) {
     }
 }
 </script>
-
-<!-- восстановление вкладки после ошибки -->
 <script>
     const mode = document.body.dataset.mode;
     if (mode) {

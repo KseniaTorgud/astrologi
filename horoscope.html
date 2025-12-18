@@ -5,10 +5,7 @@
     <title>Гороскоп — {{ sign_name }}</title>
     <link rel="stylesheet" href="/static/horoscope.css">
 </head>
-
 <body>
-
-<!-- Плавающие звезды -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
     const count = 80;  
@@ -22,18 +19,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 </script>
-
 <div class="horoscope-container">
-
     <div class="zodiac-card">
-
         <div class="zodiac-circle">
             <img src="/static/zodiac/zodiac.png" alt="{{ sign }}" class="zodiac-icon">
         </div>
-
         <h1 class="zodiac-name">{{ sign_name }}</h1>
         <p class="zodiac-date-range">{{ date_range }}</p>
-
             <h1>{{ zodiac }}</h1>
 
             <div class="date">
@@ -45,10 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
 
         <a href="/cabinet" class="back-btn">Назад</a>
-
     </div>
-
 </div>
-
 </body>
 </html>
