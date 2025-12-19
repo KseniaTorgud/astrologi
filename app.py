@@ -99,6 +99,8 @@ def tarot_three():
     return jsonify(three_cards)
 
 
+from utils.ai import generate_daily_horoscope
+
 @app.route("/horoscope", methods=["GET", "POST"])
 def horoscope():
     if "username" not in session:
@@ -107,30 +109,30 @@ def horoscope():
     username = session["username"]
     user = get_user(username)
 
+    # Если дата рождения ещё не введена
     if not user.get("birthday"):
         if request.method == "POST":
             birthday = request.form.get("birthday")
             date = datetime.strptime(birthday, "%Y-%m-%d")
-
             sign = get_zodiac_sign(date.month, date.day)
             update_birthday(username, birthday, sign)
-
             return redirect(url_for("horoscope"))
-
         return render_template("enter_birthday.html")
 
-    with open("horoscopes.json", "r", encoding="utf-8") as f:
-        horoscopes = json.load(f)
-
     zodiac = user["zodiac"]
-    horoscope_text = horoscopes.get(zodiac, "Гороскоп не найден.")
+
+    # Генерация гороскопа через ИИ с кэшированием
+    horoscope_text = generate_daily_horoscope(zodiac)
+    current_date = datetime.now().strftime("%d.%m.%Y")
 
     return render_template(
         "horoscope.html",
         zodiac=zodiac,
         horoscope=horoscope_text,
-        birthday=user["birthday"]
+        birthday=user["birthday"],
+        current_date=current_date
     )
+
 
 @app.route("/compatibility", methods=["GET", "POST"])
 def compatibility():
