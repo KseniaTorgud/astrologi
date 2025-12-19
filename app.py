@@ -109,7 +109,6 @@ def horoscope():
     username = session["username"]
     user = get_user(username)
 
-    # Если дата рождения ещё не введена
     if not user.get("birthday"):
         if request.method == "POST":
             birthday = request.form.get("birthday")
@@ -120,8 +119,6 @@ def horoscope():
         return render_template("enter_birthday.html")
 
     zodiac = user["zodiac"]
-
-    # Генерация гороскопа через ИИ с кэшированием
     horoscope_text = generate_daily_horoscope(zodiac)
     current_date = datetime.now().strftime("%d.%m.%Y")
 
